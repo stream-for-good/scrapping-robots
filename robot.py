@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import ElementClickInterceptedException
+from selenium.webdriver.common.action_chains import ActionChains
 import requests
 import time
 import dateparser
@@ -12,8 +13,8 @@ import json
 # Retreive login/pwd from API
 
 session = requests.Session()
-payload = {"client_id": "dashboard-vuejs", "grant_type": "password", "scope": "dashboard-vuejs", "username": "<<user>>",
-           "password": "<<password>>"}
+payload = {"client_id": "dashboard-vuejs", "grant_type": "password", "scope": "dashboard-vuejs", "username": "user1",
+           "password": "user"}
 resp = session.post('https://auth.vod-prime.space/auth/realms/discoverability/protocol/openid-connect/token',
                     data=payload)
 access_token = resp.json()["access_token"]
@@ -25,7 +26,12 @@ single_credentials_link = credentials["links"][0]["href"]
 single_credentials = session.get(single_credentials_link, headers=headers).json()
 login = single_credentials["credentials"]["login"]
 password = single_credentials["credentials"]["password"]
-browser = webdriver.Chrome()
+
+options = webdriver.ChromeOptions()
+options.add_argument('--headless')
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+browser = webdriver.Chrome(chrome_options=options)
 
 browser.get('https://www.netflix.com/login')
 
@@ -51,11 +57,11 @@ time.sleep(5)
 now = datetime.datetime.now()
 payload = []
 for row in browser.find_elements_by_css_selector("div.row"):
-
+    browser.execute_script("arguments[0].scrollIntoView();", row)
     start_time = row.find_element_by_css_selector("div.start-time").text
-
+    print("content start time:"+start_time)
     parsed_date = dateparser.parse(start_time)
-
+   
     if row.find_element_by_css_selector("div.direct-label").text == "":
         if parsed_date < now:
             parsed_date = parsed_date + datetime.timedelta(days=1)
@@ -70,7 +76,7 @@ for row in browser.find_elements_by_css_selector("div.row"):
     esc = browser.find_element_by_css_selector("div.previewModal-close")
     try:
         esc.click()
-    except ElementClickInterceptedException as e:
+    except Exception as e:
         print(e)
     time.sleep(2)
 
