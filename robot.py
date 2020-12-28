@@ -31,8 +31,8 @@ options = webdriver.ChromeOptions()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
-browser = webdriver.Chrome(chrome_options=options)
-
+browser = webdriver.Chrome(options=options)
+actions = ActionChains(browser)
 browser.get('https://www.netflix.com/login')
 
 elem = browser.find_element_by_id('id_userLoginId')
@@ -72,13 +72,11 @@ for row in browser.find_elements_by_css_selector("div.row"):
         "video_id": browser.current_url.split("jbv=")[1]
     }
     payload.append(row_data)
+    resp = session.post('https://conso-api.vod-prime.space/direct', json=[row_data])
     time.sleep(2)
-    esc = browser.find_element_by_css_selector("div.previewModal-close")
-    try:
-        esc.click()
-    except Exception as e:
-        print(e)
-    time.sleep(2)
+    
+    actions.send_keys(Keys.ESCAPE)
+    actions.perform()
 
-resp = session.post('https://conso-api.vod-prime.space/direct', json=payload)
-print(resp)
+    time.sleep(1)
+
