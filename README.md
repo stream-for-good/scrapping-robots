@@ -17,7 +17,7 @@ sudo apt-get install python3 python3-pip makefile --yes
 
 #### Installing the required python libraries
 
-all the required libraries are listed in the requirements.txt file. To install them with pip, simply type
+All the required libraries are listed in the requirements.txt file. To install them with pip, simply type
 
 ```bash
 pip install -r requirements.txt
@@ -32,11 +32,11 @@ sudo apt-get install chromium-chromedriver
 
 ##### Manual installation
 
-go to https://chromedriver.chromium.org/ and download the latest stable chromedriver zip file for your system. Unzip the chromedriver at the root of the repo (it will be picked up by the Makefile) OR make sure it's in your PATH.
+Go to https://chromedriver.chromium.org/ and download the latest stable chromedriver zip file for your system. Unzip the chromedriver at the root of the repo (it will be picked up by the Makefile) OR make sure it's in your PATH.
 
 ## vod-prime.space credentials
 
-you need a vod-prime.space account to use this robot. Once you have your account, please create a `.env` file following the template here with your vod-prime.space credentials.
+You need a vod-prime.space account to use this robot. Once you have your account, please create a `.env` file following the template here with your vod-prime.space credentials.
 
 ```bash
 #write a file .env at the root of the repo with the following data
@@ -46,6 +46,6 @@ VOD_PASSWORD= #your vod-prime.space password
 
 ## running 
 
-once the setup is complete, to run the robot, just type `make` at the root of your repository.
-By default, the robot uses an headless chrome driver so that it can safely run on an Rasberry Pi without a screen attached
+Once the setup is complete, to run the robot, just type `make` at the root of your repository.
+By default, the robot uses a headless chrome driver so that it can safely run on a Rasberry Pi without a screen attached.
 
