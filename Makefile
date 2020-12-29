@@ -1,2 +1,5 @@
+SHELL := /bin/bash
+
 all:
-	PATH=${PATH}:. ./robot.py
+	source ./.env && export VOD_USER && export VOD_PASSWORD && PATH=${PATH}:. ./robot.py
+

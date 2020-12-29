@@ -9,12 +9,15 @@ import time
 import dateparser
 import datetime
 import json
+import os
 
+vod_user=os.environ["VOD_USER"]
+vod_password=os.environ["VOD_PASSWORD"]
 # Retreive login/pwd from API
 
 session = requests.Session()
-payload = {"client_id": "dashboard-vuejs", "grant_type": "password", "scope": "dashboard-vuejs", "username": "user1",
-           "password": "user"}
+payload = {"client_id": "dashboard-vuejs", "grant_type": "password", "scope": "dashboard-vuejs", "username": vod_user,
+           "password": vod_password}
 resp = session.post('https://auth.vod-prime.space/auth/realms/discoverability/protocol/openid-connect/token',
                     data=payload)
 access_token = resp.json()["access_token"]
