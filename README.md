@@ -44,8 +44,10 @@ VOD_USER= #<your vod-prime.space user
 VOD_PASSWORD= #your vod-prime.space password
 ```
 
-## running 
+## running the robots
 
-Once the setup is complete, to run the robot, just type `make` at the root of your repository.
+### Direct Netflix Scrapping
+
+Once the setup is complete, to run the robot, just type `make direct` at the root of your repository.
 By default, the robot uses a headless chrome driver so that it can safely run on a Rasberry Pi without a screen attached.
 
