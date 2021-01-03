@@ -42,7 +42,7 @@ Go to https://chromedriver.chromium.org/ and download the latest stable chromedr
 ### Building the docker image
 
 ```
-docker build -t stream4good/scrapping-robot-direct -f direct/Dockerfile
+docker build -t stream4good/scrapping-robot-direct -f direct/Dockerfile ./direct/
 ```
 
 ## vod-prime.space credentials
