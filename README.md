@@ -1,5 +1,10 @@
 # scrapping-robots
 
+# Build state
+
+| robot | build |
+| ----- | ----- |
+| direct | [![Build Status](https://travis-ci.com/stream-for-good/scrapping-robots.svg?branch=main)](https://travis-ci.com/stream-for-good/scrapping-robots) |
 
 ## Prerequisites
 
