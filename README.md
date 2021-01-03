@@ -2,9 +2,9 @@
 
 # Build state
 
-| robot | build |
-| ----- | ----- |
-| direct | [![Build Status](https://travis-ci.com/stream-for-good/scrapping-robots.svg?branch=main)](https://travis-ci.com/stream-for-good/scrapping-robots) |
+| robot | build | Docker Hub |
+| ----- | ----- | ---------- |
+| direct | [![Build Status](https://travis-ci.com/stream-for-good/scrapping-robots.svg?branch=main)](https://travis-ci.com/stream-for-good/scrapping-robots) | [Docker images](https://hub.docker.com/r/stream4good/scrapping-robot-direct)|
 
 ## Prerequisites
 
