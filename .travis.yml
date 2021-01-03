@@ -6,5 +6,5 @@ services:
   
 script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build -t stream4good/scrapping-robot-direct:$TRAVIS_BRANCH -f direct/Dockerfile
+  - docker build -t stream4good/scrapping-robot-direct:$TRAVIS_BRANCH -f direct/Dockerfile ./direct/
   - docker push stream4good/scrapping-robot-direct:$TRAVIS_BRANCH
