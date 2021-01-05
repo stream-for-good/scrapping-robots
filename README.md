@@ -25,7 +25,7 @@ sudo apt-get install python3 python3-pip makefile --yes
 All the required libraries are listed in the requirements.txt file. To install them with pip, simply type
 
 ```bash
-pip install -r requirements.txt
+pip install -r */requirements.txt
 ```
 ### Installing the Chrome WebDriver
 
@@ -39,7 +39,9 @@ sudo apt-get install chromium-chromedriver
 
 Go to https://chromedriver.chromium.org/ and download the latest stable chromedriver zip file for your system. Unzip the chromedriver at the root of the repo (it will be picked up by the Makefile) OR make sure it's in your PATH.
 
-### Building the docker image
+### Building the docker images
+
+#### direct scrapping robot
 
 ```
 docker build -t stream4good/scrapping-robot-direct -f direct/Dockerfile ./direct/
@@ -57,13 +59,13 @@ VOD_PASSWORD= #your vod-prime.space password
 
 ## running the robots
 
-### Native Direct Netflix Scrapping 
+### Native Direct Scrapping 
 
 Once the setup is complete, to run the robot, just type `make direct` at the root of your repository.
 By default, the robot uses a headless chrome driver so that it can safely run on a Rasberry Pi without a screen attached.
 
 
-### Docker Direct Netflix Scrapping 
+### Docker Direct Scrapping 
 
 you can run the robot in docker (amd64 only is supported). The `main` tag is pushed automatically from the main branch by travis-ci.com
 
