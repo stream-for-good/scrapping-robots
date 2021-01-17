@@ -16,11 +16,11 @@ docker-build: ${DOCKERFILES} ## Build the docker images for each robots
 
 docker-push: ## pushes all the pending docker images not pushed yet
 	docker images -f "label=topush" --format '{{.Repository}}'|xargs -I {} docker push {}
-	docker rmi $(docker images -f "label=topush" --format "{{.ID}}")
+	docker rmi `docker images -f "label=topush" --format "{{.ID}}"`
 
 ./%/Dockerfile-build:
 	$(eval ROBOTNAME := $(patsubst %/Dockerfile-build,%,$(basename $@)))
-	docker build --label "topush=true" -t stream4good/${ROBOTNAME} -f $(patsubst %-build,%,$@) ./${ROBOTNAME} 
+	docker build --label "topush=true" -t stream4good/scrapping-robot-${ROBOTNAME} -f $(patsubst %-build,%,$@) ./${ROBOTNAME} 
 
 
 reqs: ${ROBOTS_DIRECTORIES} ## install the requirements for every robots
