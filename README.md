@@ -2,9 +2,11 @@
 
 # Build state
 
-| robot | build | Docker Hub |
-| ----- | ----- | ---------- |
-| direct | [![Build Status](https://travis-ci.com/stream-for-good/scrapping-robots.svg?branch=main)](https://travis-ci.com/stream-for-good/scrapping-robots) | [Docker images](https://hub.docker.com/r/stream4good/scrapping-robot-direct)|
+| robot | build | Docker Hub | Description |
+| ----- | ----- | ---------- | ----------  |
+| direct | [![Build Status](https://travis-ci.com/stream-for-good/scrapping-robots.svg?branch=main)](https://travis-ci.com/stream-for-good/scrapping-robots) | [Docker images](https://hub.docker.com/r/stream4good/scrapping-robot-direct)| Records netflix live schedule |
+| netflixid | [![Build Status](https://travis-ci.com/stream-for-good/scrapping-robots.svg?branch=main)](https://travis-ci.com/stream-for-good/scrapping-robots) | [Docker images](https://hub.docker.com/r/stream4good/scrapping-robot-netflixid)| Records metadata on netflix video |
+| thumbnails | [![Build Status](https://travis-ci.com/stream-for-good/scrapping-robots.svg?branch=main)](https://travis-ci.com/stream-for-good/scrapping-robots) | [Docker images](https://hub.docker.com/r/stream4good/scrapping-robot-thumbnails)| Records data from robot scripts |
 
 ## Prerequisites
 
@@ -20,13 +22,6 @@ you can install everything on debian with
 sudo apt-get install python3 python3-pip makefile --yes
 ```
 
-### Installing the required python libraries
-
-All the required libraries are listed in the requirements.txt file. To install them with pip, simply type
-
-```bash
-pip install -r */requirements.txt
-```
 ### Installing the Chrome WebDriver
 
 #### Automatic installation on Raspberry Pi OS
@@ -39,13 +34,27 @@ sudo apt-get install chromium-chromedriver
 
 Go to https://chromedriver.chromium.org/ and download the latest stable chromedriver zip file for your system. Unzip the chromedriver at the root of the repo (it will be picked up by the Makefile) OR make sure it's in your PATH.
 
-### Building the docker images
 
-#### direct scrapping robot
+### Use the Makefile to run the robots and build docker images
+
+The makefile provides shortcuts to perform scrapping robots duties. Type `make help` to show the documentation.
 
 ```
-docker build -t stream4good/scrapping-robot-direct -f direct/Dockerfile ./direct/
+----------------------------------------------------------------------
+This scripts runs and install prerequisites for scrapping robots
+----------------------------------------------------------------------
+help:     Show this help.
+docker-build: ${DOCKERFILES} Build the docker images for each robots
+docker-push: pushes all the pending docker images not pushed yet
+reqs: ${ROBOTS_DIRECTORIES} install the requirements for every robots
+direct: run the direct scrapping
+netflixid: run the scrapping for unknown netflix id in the database
+thumbnails: TODO add HELP
 ```
+
+### Installing the required python libraries
+
+All the required libraries are listed in the requirements.txt files.  You can do a `pip intall -r */requirements.txt` to install whatever requirements make sense for your particular robot or use the makefile target `make reqs`
 
 ## vod-prime.space credentials
 
@@ -57,18 +66,3 @@ VOD_USER= #<your vod-prime.space user
 VOD_PASSWORD= #your vod-prime.space password
 ```
 
-## running the robots
-
-### Native Direct Scrapping 
-
-Once the setup is complete, to run the robot, just type `make direct` at the root of your repository.
-By default, the robot uses a headless chrome driver so that it can safely run on a Rasberry Pi without a screen attached.
-
-
-### Docker Direct Scrapping 
-
-you can run the robot in docker (amd64 only is supported). The `main` tag is pushed automatically from the main branch by travis-ci.com
-
-```
-docker run -e VOD_USER=<primespace_user> -e VOD_PASSWORD=<primespace_pwd> stream4good/scrapping-robot-direct:main
-```
