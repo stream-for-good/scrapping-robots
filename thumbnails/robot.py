@@ -26,7 +26,6 @@ vod_user=os.environ["VOD_USER"]
 vod_password=os.environ["VOD_PASSWORD"]
 # Retreive login/pwd from API
 
-	
 session = requests.Session()
 payload = {"client_id": "dashboard-vuejs", "grant_type": "password", "scope": "dashboard-vuejs", "username": vod_user,
            "password": vod_password}
@@ -50,6 +49,9 @@ result2=github_release.gh_asset_download("discoverability/discoverability","5.2.
 
 options = webdriver.ChromeOptions()
 options.add_argument('--no-sandbox')
+options.add_argument("--allow-running-insecure-content")
+options.add_argument("--ignore-ssl-errors=yes")
+options.add_argument("--ignore-certificate-errors")
 options.add_argument("--disable-gpu")
 options.add_argument('--disable-dev-shm-usage')
 options.add_extension("./Prime-Space-Sorbonne-5.2.10-prod.crx")
@@ -67,7 +69,8 @@ print("extension prime-space Loaded!")
 
 
 browser.get("https://dashboard.vod-prime.space")
-time.sleep(5)
+time.sleep(10)
+browser.save_screenshot('SeleniumChromiumTest0.png')
 
 browser.find_element(By.ID, "username").click()
 browser.find_element(By.ID, "username").send_keys(vod_user)
@@ -91,17 +94,20 @@ elem.click()
 time.sleep(5)
 print("Netflix Reached and credentials worked")
 
-for i in range (1,24,1):
-	print(i)
-	row="#row-"+str(i)+" .handle"
-	time.sleep(1)
-	browser.find_element(By.CSS_SELECTOR, row).click()
-	time.sleep(3)
-	row="#row-"+str(i)+" .handleNext"
-	browser.find_element(By.CSS_SELECTOR, row).click()
-	time.sleep(2)
-	browser.find_element(By.CSS_SELECTOR, row).click()
-	time.sleep(2)
+for i in range (1,30,1):
+    print(i)
+    row="#row-"+str(i)+" .handle"
+    time.sleep(1)
+    isPresent=len(browser.find_elements(By.CSS_SELECTOR, row))>0
+    if isPresent==False: 
+        continue
+    browser.find_element(By.CSS_SELECTOR, row).click()
+    time.sleep(3)
+    row="#row-"+str(i)+" .handleNext"
+    browser.find_element(By.CSS_SELECTOR, row).click()
+    time.sleep(2)
+    browser.find_element(By.CSS_SELECTOR, row).click()
+    time.sleep(2)
 
 
 
