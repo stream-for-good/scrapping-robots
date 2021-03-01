@@ -6,7 +6,7 @@ __pycache__/
 *$py.class
 
 # C extensions
-#*.so (needed for watcher)
+#*.so --> (needed for watcher)
 
 # Distribution / packaging
 .Python
