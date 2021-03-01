@@ -36,7 +36,7 @@ Arrêt d'un conteneur:
 docker stop (le nom du conteneur)
 
 Rentrez dans un conteneur:
-docker exec (+le nom du conteneur) bash
+docker exec -it (+le nom du conteneur) bash
 
 Quitter un conteneur:
 exit 
