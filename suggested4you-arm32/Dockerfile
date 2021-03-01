@@ -22,7 +22,7 @@ COPY ./robot.py ./opt/robots/robot.py
 COPY ./WidevineCdm /.opt/WidevineCdm
 COPY ./bin/chromedriver ./bin/chromedriver
 COPY ./bin/chromium-browser/ ./bin/chromium-browser
-#COPY ./chromium-browser/ ./lib/chromium-browser/
+
 WORKDIR ./opt/robots
 CMD ["python3", "./robot.py"]
 
