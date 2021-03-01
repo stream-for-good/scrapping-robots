@@ -1,6 +1,6 @@
 from ubuntu
 RUN apt update && apt install -y 
-RUN apt-get update && apt-get install -y xvfb gcc python3 python3-pip apt-utils nano wget git openssl 
+RUN apt-get update && apt-get install -y xvfb gcc python3 python3-pip apt-utils nano wget git openssl vim
 RUN apt-get update && apt-get install -y libraspberrypi0 libraspberrypi-dev libraspberrypi-bin
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata 
 RUN apt-get update && apt-get install -y nano wget git openssl 
