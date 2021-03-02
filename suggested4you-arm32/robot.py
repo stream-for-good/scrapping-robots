@@ -6,7 +6,6 @@ import json
 import os
 import requests
 import github_release
-
 from secrets import randbelow
 from pyvirtualdisplay import Display
 
@@ -50,7 +49,7 @@ password = single_credentials["credentials"]["password"]
 
 print ('Starting ...')
 
-#DOWNLOAD .crx
+#DOWNLOAD EXTENTION PRIME-SPACE
 result2=github_release.gh_asset_download("discoverability/discoverability","5.2.10")
 
 
@@ -80,7 +79,7 @@ print ('webdriver loaded')
 
 driver.get("chrome://extensions/?id=blkbcjgilnfbdbnfdacpffhjbeigkmgj")
 driver.refresh()
-driver.save_screenshot('SeleniumChromiumTest0.png')
+#driver.save_screenshot('Prime-space-view.png')
 
 
 
@@ -93,7 +92,7 @@ driver.find_element(By.ID, "password").click()
 driver.find_element(By.ID, "password").send_keys(vod_password)
 driver.find_element(By.ID, "kc-login").click()
 time.sleep(5)
-driver.save_screenshot('SeleniumChromiumTest.png')
+#driver.save_screenshot('Dashboard-view.png')
 
 
 
@@ -115,7 +114,7 @@ driver.find_element(By.ID, "id_userLoginId").send_keys(login)
 driver.find_element(By.ID, "id_password").click()
 driver.find_element(By.ID, "id_password").send_keys(password)
 driver.find_element(By.CSS_SELECTOR, ".login-button").click()
-driver.save_screenshot('SeleniumChromiumTest2.png')
+driver.save_screenshot('Netflix-login-view.png')
 time.sleep(15)
 print ('Netflix credentials work!')
 
@@ -174,7 +173,7 @@ while(round):
 	watched+=1
 	driver.get(netflix_url)
 	time.sleep(10)
-	print ('Scraping One: OK')
+	print ('Scraping '+watched+': OK')
 
 #Close Session
 driver.save_screenshot('SeleniumChromiumTest5.png')
