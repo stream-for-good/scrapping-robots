@@ -114,7 +114,7 @@ driver.find_element(By.ID, "id_userLoginId").send_keys(login)
 driver.find_element(By.ID, "id_password").click()
 driver.find_element(By.ID, "id_password").send_keys(password)
 driver.find_element(By.CSS_SELECTOR, ".login-button").click()
-driver.save_screenshot('Netflix-login-view.png')
+#driver.save_screenshot('Netflix-login-view.png')
 time.sleep(15)
 print ('Netflix credentials work!')
 
@@ -134,20 +134,18 @@ watched=0
 while(round):
 	roundsecret=randbelow(4)
 	round_secret=str(roundsecret)
-
 	### ICI ON SE DEPLACE GENERIQUEMENT À LA LIGNE "NOTRE SELECTION POUR "
 	wozx=len(driver.find_elements(By.XPATH,"//div[@data-list-context='topTen']"))>0
 	while (wozx==False):
 		wozx=len(driver.find_elements(By.XPATH,"//div[@data-list-context='topTen']"))>0
 		driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
-	#######################################################
-
-	driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
+	
+	
 	time.sleep(5)
 	element=(driver.find_element(By.XPATH,"//div[@data-list-context='topTen']/div[@class='rowContainer rowContainer_title_card']/div[@class='ptrack-container']/div[@class='rowContent slider-hover-trigger-layer']/div[@class='slider']/div[@class='sliderMask showPeek']/div[@class='sliderContent row-with-x-columns']/div[@class='slider-item slider-item-"+round_secret+"']/div[@class='title-card-container ltr-0']"))
 	actions=ActionChains(driver)
 	actions.click(element).perform()
-	driver.save_screenshot('SeleniumChromiumTest3.png')
+	#driver.save_screenshot('Netflix-choice-view.png')
 	time.sleep(10)
 	element = driver.find_element(By.CSS_SELECTOR, "body")
 	actions = ActionChains(driver)
@@ -158,24 +156,30 @@ while(round):
 	actions.move_to_element(element).perform()
 	driver.find_element(By.CSS_SELECTOR, ".primary-button > .color-primary").click()
 	time.sleep(10)
+
+
+	#Issue ouverte :  comment récupéré dynamiquementla durée d'un film
 	currentUrl=driver.current_url
 	newUrl=driver.current_url
 	now=datetime.datetime.now()
 	after_2_30_hour=now+datetime.timedelta(hours=2)
 	after_2_30_hour=after_2_30_hour+datetime.timedelta(minutes=30)
+
+
 	print("you are watching:")
 	print(currentUrl)
 	while(newUrl==currentUrl and now<after_2_30_hour):
 		newUrl=driver.current_url
 		now=datetime.datetime.now()
 		time.sleep(60)
-	driver.save_screenshot('SeleniumChromiumTest4.png')
+	#driver.save_screenshot('End-screen.png')
 	watched+=1
 	driver.get(netflix_url)
 	time.sleep(10)
 	print ('Scraping '+watched+': OK')
 
+
 #Close Session
-driver.save_screenshot('SeleniumChromiumTest5.png')
+#driver.save_screenshot('closing-chomedriver.png')
 driver.close()
 print ('Done')
