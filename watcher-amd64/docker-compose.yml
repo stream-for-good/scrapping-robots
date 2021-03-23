@@ -1,0 +1,9 @@
+version: '3.3'
+services:
+  watcher:
+    image: 'wallseven/watcher-amd64:latest'
+    container_name: watcher_container_amd64
+    env_file:
+      - envfile
+    volumes:
+      - './test-dynamique/:/opt/robots/'

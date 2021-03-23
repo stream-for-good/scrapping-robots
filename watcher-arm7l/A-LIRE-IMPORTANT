@@ -1,0 +1,59 @@
+Il est nécéssaire d'avoir la librairie libseccomp en version 
+non stable pour pouvoir build à partir d'ubuntu 20.04 à bord du pi, voici les commandes
+en question:
+
+Façon 1:
+
+sh build.sh
+
+
+Façon 2:
+
+
+wget http://ftp.fr.debian.org/debian/pool/main/libs/libseccomp/libseccomp2_2.5.1-1_armhf.deb
+sudo dpkg -i libseccomp2_2.5.1-1_armhf.deb
+docker build -t wallseven/watcher .
+
+
+
+Crée un fichier envfile dans le dossier ou vous lancer l'image et
+remplissez le de la sorte:
+
+VOD_USER=IDENTIFIANT-PRIME-SPACE
+VOD_PASSWORD=MDP-PRIME-SPACE
+
+Lancement en mode test:
+//cette méthode crée un volume partagé avec des screeshots dynamique de
+ce qu'il se passe dans le conteneur watcher:
+
+docker-compose up 
+
+
+
+
+
+Lancement du robot watcher en mode détacher (arrière plan):
+docker run --env-file envfile -d watcher/suggested4you 
+
+Lancement du robot watcher et surveillance de l'avancement:
+docker run --env-file envfile -it watcher/suggested4you python3 robot.py
+
+Rentrez et naviguez dans le conteneur du robot sans lancer le script:
+docker run --env-file envfile -it watcher/suggested4you bash
+
+Après ces Docker run il n'est plus nécessaire de faire de docker run pour 
+relancer les robots, faites un "docker ps -a" pour afficher tout les conteneurs
+docker déjà crée.
+
+Lancer un conteneur:
+docker start (le nom du conteneur)
+Il est afficher à droite lorsque vous faites "docker ps -a". 
+
+Arrêt d'un conteneur:
+docker stop (le nom du conteneur)
+
+Rentrez dans un conteneur:
+docker exec -it (+le nom du conteneur) bash
+
+Quitter un conteneur:
+exit 

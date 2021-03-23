@@ -1,0 +1,9 @@
+version: '3'
+services:
+  watcher:
+    image: 'wallseven/watcher-arm7l:latest'
+    container_name: watcher_container_arm7l
+    env_file:
+      - envfile
+    volumes:
+      - './test-dynamique/:/opt/robots/'
