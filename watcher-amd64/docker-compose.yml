@@ -2,7 +2,7 @@ version: '3.6'
 services:
   watcher:
     image: 'wallseven/watcher:latest'
-    container_name: watcher_container_arm7l
+    container_name: watcher_container_amd64
     env_file:
       - ../envfile
     volumes:

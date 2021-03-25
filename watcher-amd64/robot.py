@@ -66,7 +66,7 @@ print ('Display Activated')
 opt = webdriver.ChromeOptions()
 caps = webdriver.DesiredCapabilities.CHROME.copy()
 
-opt.binary_location ="/lib/chromium-browser/chromium-browser"
+opt.binary_location ="/usr/bin/google-chrome-stable"
 opt.add_argument("--no-sandbox")
 opt.add_argument("--disable-gpu")
 opt.add_argument("--allow-running-insecure-content")
@@ -75,7 +75,6 @@ opt.add_argument("--window-size=1280,720")
 opt.add_argument("--ignore-certificate-errors")
 opt.add_argument("--disable-dev-shm-usage")
 opt.add_extension("./Prime-Space-Sorbonne-5.2.11-prod.crx")
-opt.add_argument("--user-agent=Mozilla/5.0 (X11; CrOS armv7l 12371.89.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36")
 caps['goog:loggingPrefs'] = { 'browser':'ALL' }
 
 
@@ -85,12 +84,12 @@ driver = webdriver.Chrome(executable_path='/usr/bin/chromedriver',options=opt,de
 print ('webdriver loaded')
 
 
-#check extension situation
+
 driver.get("chrome://extensions/?id=blkbcjgilnfbdbnfdacpffhjbeigkmgj")
 driver.refresh()
 driver.save_screenshot('Screenshot1.png')
 time.sleep(1)
-print ('extension PRIME-SPACE loaded')
+
 
 
 
@@ -145,7 +144,7 @@ while(round):
     roundsecret=randbelow(4)
     round_secret=str(roundsecret)
 
-    ### ICI ON SE DEPLACE GENERIQUEMENT À LA LIGNE "NOTRE SELECTION POUR [NAME_PROFILE] "
+    ### ICI ON SE DEPLACE GENERIQUEMENT À LA LIGNE "NOTRE SELECTION POUR "
     wozx=len(driver.find_elements(By.XPATH,"//div[@data-list-context='topTen']"))>0
     while (wozx==False):
         driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")

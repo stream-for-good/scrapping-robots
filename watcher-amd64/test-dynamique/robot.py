@@ -66,7 +66,7 @@ print ('Display Activated')
 opt = webdriver.ChromeOptions()
 caps = webdriver.DesiredCapabilities.CHROME.copy()
 
-opt.binary_location ="/lib/chromium-browser/chromium-browser"
+opt.binary_location ="/usr/bin/google-chrome-stable"
 opt.add_argument("--no-sandbox")
 opt.add_argument("--disable-gpu")
 opt.add_argument("--allow-running-insecure-content")
@@ -75,7 +75,6 @@ opt.add_argument("--window-size=1280,720")
 opt.add_argument("--ignore-certificate-errors")
 opt.add_argument("--disable-dev-shm-usage")
 opt.add_extension("./Prime-Space-Sorbonne-5.2.11-prod.crx")
-opt.add_argument("--user-agent=Mozilla/5.0 (X11; CrOS armv7l 12371.89.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36")
 caps['goog:loggingPrefs'] = { 'browser':'ALL' }
 
 

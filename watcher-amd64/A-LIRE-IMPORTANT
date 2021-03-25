@@ -3,17 +3,10 @@ non stable pour pouvoir build à partir d'ubuntu 20.04 à bord du pi, voici les 
 en question:
 
 Façon 1:
-
 sh build.sh
 
-
 Façon 2:
-
-
-wget http://ftp.fr.debian.org/debian/pool/main/libs/libseccomp/libseccomp2_2.5.1-1_armhf.deb
-sudo dpkg -i libseccomp2_2.5.1-1_armhf.deb
-docker build -t wallseven/watcher .
-
+docker build -t wallseven/watcher-amd64 .
 
 
 Crée un fichier envfile dans le dossier ou vous lancer l'image et
@@ -24,12 +17,7 @@ VOD_PASSWORD=MDP-PRIME-SPACE
 
 Lancement en mode test:
 //cette méthode crée un volume partagé avec des screeshots dynamique de
-ce qu'il se passe dans le conteneur watcher:
-
-docker-compose up 
-
-
-
+ce qu'il se passe dans le conteneur watcher: docker-compose up 
 
 
 Lancement du robot watcher en mode détacher (arrière plan):
