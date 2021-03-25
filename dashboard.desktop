@@ -1,0 +1,6 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Dashboard
+Type=Link
+URL=http://127.0.0.1:8000/
+Icon=text-html

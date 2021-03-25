@@ -72,5 +72,5 @@ for unknown_video_id in unknown_video_ids:
 
     
     title_element=browser.find_element_by_css_selector("p.previewModal--section-header strong")
-    print(f"{unknown_video_id} is {title_element.text} that was easy")
+    print(f"{unknown_video_id} is {title_element.text} ")
     

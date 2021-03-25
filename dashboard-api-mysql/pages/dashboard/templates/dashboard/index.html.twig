@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashboardController!{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables_themeroller.css">
+{% endblock %}
+
+{% block body %}
+<div id="page-wrapper">
+
+		    <div class="container-fluid">
+
+		        <!-- Page Heading -->
+		        <div class="row">
+		            <div class="col-lg-12">
+		                <h1 class="page-header">
+		                    Dashboard <small>Stream 4 Good</small>
+		                </h1>
+		                <ol class="breadcrumb">
+		                    <li class="active">
+		                        <i class="fa fa-dashboard"></i> Dashboard
+		                    </li>
+		                </ol>
+		            </div>
+		        </div>
+		        <!-- /.row -->
+
+
+
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i> Lancer une action</h3>
+							</div>
+							<div class="panel-body">
+								{{ form_start(formTask) }}
+
+								{{ form_label(formTask.robot, "Choix du robot : ") }}
+								{{ form_widget(formTask.robot, {'attr': {'class': 'form-inline'}}) }}
+
+								{{ form_label(formTask.loop) }}
+								{{ form_widget(formTask.loop, {'attr': {'class': 'form-inline'}}) }}
+
+								{{ form_widget(formTask.save) }}
+
+								{{ form_end(formTask) }}
+							</div>
+						</div>
+					</div>
+				</div>
+
+		        <div class="row">
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Tâche(s) en attente</h3>
+							</div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table" id="dataTableId">
+										<thead>
+										<tr>
+											<th>Date</th>
+											<th>Robot</th>
+											<th>Etat</th>
+											<th>Execution(s)</th>
+										</tr>
+										</thead>
+										<tbody>
+										{% for task in tasks %}
+											<tr>
+												<td>{{ task.date | date('d-m-Y H:i:s') }}</td>
+												<td>{{ task.robot }}</td>
+												<td>{{ task.state }}</td>
+												<td>{{ task.loop }}</td>
+											</tr>
+										{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+		            <div class="col-lg-6">
+		                <div class="panel panel-default">
+		                    <div class="panel-heading">
+		                        <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Données recoltées</h3>
+		                    </div>
+							<div class="panel-body">
+								<div class="table-responsive">
+									<table class="table" id="dataTableId2">
+										<thead>
+										<tr>
+											<th>Date</th>
+											<th>Catégorie</th>
+											<th>Données recoltées</th>
+										</tr>
+										</thead>
+										<tbody>
+										{% for data in datas %}
+											<tr>
+												<td>{{data.task.date | date('d-m-Y H:i:s')}}</td>
+												<td>{{ data.task.robot.category }}</td>
+												<td>{{data.log | replace({'\\n':"<br/>"})| raw  }}</td>
+											</tr>
+										{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+		                </div>
+		            </div>
+		        </div>
+		        <!-- /.row -->
+
+		    </div>
+		    <!-- /.container-fluid -->
+
+		</div>
+		<!-- /#page-wrapper -->
+
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+	<script src="{{ asset('js/myDataTable.js') }}"></script>
+{% endblock %}
+

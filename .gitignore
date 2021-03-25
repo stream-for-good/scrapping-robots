@@ -49,6 +49,10 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+mysql/
+/mysql
+vendor/
+var/
 
 # Translations
 *.mo
@@ -101,13 +105,15 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
 .venv
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+
+/mysql
+
 
 # Spyder project settings
 .spyderproject
