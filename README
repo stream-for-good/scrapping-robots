@@ -1,0 +1,28 @@
+HELLO :)!
+
+If you want to build dashboard/api/data_base and robots
+you need first the library SSL dev to for docker build:
+
+sh SSL-LIB-BUILD-ARM.sh  
+    
+(sudo right, do it one time)
+
+and if you didn't install docker before and 
+other necessary stuff run:
+
+sh requirements/docker-install.sh 
+
+(reboot auto, do it one time)
+
+Build dashboard and robots:
+
+sh build-dashboard-api-mysql-all.sh 
+sh build-robot.sh 
+
+Let's go for intersting thing!
+
+Run the dashboard:
+
+sh boot-dashboard-api.sh 
+
+
