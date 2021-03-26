@@ -189,7 +189,7 @@ while(round):
                             if (len(data)>0):
                                     timestamp = re.findall(r'console-api\'\,(.*?)\}',str(e))
                                     if(len(timestamp)>0):
-                                            writer.writerow([data[0]+timestamp[0]])
+                                            print(data[0]+timestamp[0])
     
     while(newUrl==currentUrl and now<after_2_30_hour):
         newUrl=driver.current_url
