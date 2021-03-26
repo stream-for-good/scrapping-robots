@@ -71,7 +71,7 @@ while (True):
     elif (robot=="netflixid"):
         while(loop!=0):
             loop-=1
-            container=client.containers.run("wallseven/netfixid",detach=True,environment=credentials,name="container-thumbnails",remove=True)
+            container=client.containers.run("wallseven/netflixid",detach=True,environment=credentials,name="container-thumbnails",remove=True)
             for line in container.logs(stream=True):
                 text+=str(line)
                 
