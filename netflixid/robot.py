@@ -10,6 +10,7 @@ import dateparser
 import datetime
 import json
 import os
+from s4gpy.s4gpy import S4GAPI
 
 vod_user=os.environ["VOD_USER"]
 vod_password=os.environ["VOD_PASSWORD"]

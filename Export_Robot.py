@@ -8,6 +8,7 @@ import os
 import requests
 
 
+time.sleep(15)
 
 #NETFLIX QUERY
 robots_collection=["watcher","thumbnails","direct","netflixid"]

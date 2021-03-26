@@ -1,18 +1,27 @@
 HELLO :)!
 
+You need VOD-PRIME-SPACE account to fullfill the "envfile" with your credentials! register there: https://dashboard.vod-prime.space 
+Be aware if you want to commit and push just write it like that and push:
+
+VOD_USER=PUT_THE_LOGIN_THERE
+VOD_PASSWORD=PUT_THE_PASSWORD_THERE
+
+
+
 PLEASE FOLLOW THIS DEPLOYMENT:
 
 We need docker, git, curl, python3, python3-pip and docker-compose
 So check if you got it already on your computer,
 if not run: (reboot)
-sh requirements/docker-install.sh   
+sh requirements/install.sh   
 
 
 
-First of all install the SSL library for docker:
-
+First of all if you are on ARM system install the SSL library for docker:
 sh SSL-LIB-BUILD-ARM.sh  
 (do it one time)
+
+
 
 
 Build dashboard and robots:
@@ -20,17 +29,22 @@ Build dashboard and robots:
 sh build-dashboard-api-mysql-all.sh 
 sh build-robot.sh 
 
+
 Let's go for intersting thing!
 
 Run the dashboard:
 
 sh boot.sh
 
-Export Robot:
+
+Export Robot: (one time)
+
 
 python3 Export_Robot.py
 
 
-DONE! Enjoy with a click on the url link! 
+DONE! 
+
+Enjoy by visiting:  http://127.0.0.1:8000/
 
 

@@ -10,6 +10,7 @@ import github_release
 import requests
 from secrets import randbelow
 from pyvirtualdisplay import Display
+from s4gpy.s4gpy import S4GAPI
 
 
 from selenium import webdriver
@@ -31,22 +32,9 @@ vod_password=os.getenv('VOD_PASSWORD')
 # Retreive login/pwd from API
 
 
-session = requests.Session()
-payload = {"client_id": "dashboard-vuejs", "grant_type": "password", "scope": "dashboard-vuejs", "username": vod_user,
-           "password": vod_password}
-resp = session.post('https://auth.vod-prime.space/auth/realms/discoverability/protocol/openid-connect/token',
-                    data=payload)
-access_token = resp.json()["access_token"]
 
-
-headers = {"Authorization": f"Bearer {access_token}"}
-credentials = session.get("https://credentials.vod-prime.space/providers/netflix", headers=headers).json()
-single_credentials_link = credentials["links"][0]["href"]
-
-single_credentials = session.get(single_credentials_link, headers=headers).json()
-login = single_credentials["credentials"]["login"]
-password = single_credentials["credentials"]["password"]
-
+api=S4GAPI(vod_user,vod_password)
+login, password = api.get_credentials_api().get_credentials("netflix")
 
 
 print ('Starting ...')
@@ -140,7 +128,7 @@ driver.save_screenshot('Screenshot3.png')
 #Scraping 
 
 round=True
-watched=0
+watched=1
 while(round):
     roundsecret=randbelow(4)
     round_secret=str(roundsecret)
@@ -201,9 +189,9 @@ while(round):
     driver.get(netflix_url)
     time.sleep(10)
     print ("Scraping "+str(watched)+": OK")
-    watched+=1
-    if (watched==10):
-        break
+    round=False
+    
+    
         
 
 #Close Session
