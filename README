@@ -9,7 +9,7 @@ sh requirements/docker-install.sh
 
 
 
-First of all install the SSL library for docker:
+First of all install the SSL library for docker if you are on arm7l system:
 
 sh SSL-LIB-BUILD-ARM.sh  
 (do it one time)
