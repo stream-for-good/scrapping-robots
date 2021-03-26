@@ -76,7 +76,6 @@ print ('webdriver loaded')
 #check extension situation
 driver.get("chrome://extensions/?id=blkbcjgilnfbdbnfdacpffhjbeigkmgj")
 driver.refresh()
-driver.save_screenshot('Screenshot1.png')
 time.sleep(1)
 print ('extension PRIME-SPACE loaded')
 
@@ -90,7 +89,6 @@ driver.find_element(By.ID, "password").click()
 driver.find_element(By.ID, "password").send_keys(vod_password)
 driver.find_element(By.ID, "kc-login").click()
 time.sleep(5)
-driver.save_screenshot('Screenshot2.png')
 
 
 
@@ -117,11 +115,14 @@ print ('Netflix credentials work!')
 
 
 #Select Profile
-driver.find_element(By.CSS_SELECTOR, ".profile:nth-child(1) .profile-icon").click()
+roundsecret=randbelow(5)
+while (roundsecret==0):
+    roundsecret=randbelow(5)
+round_secret=str(roundsecret)
+driver.find_element(By.CSS_SELECTOR, ".profile:nth-child("+round_secret+") .profile-icon").click()
 time.sleep(10)
 netflix_url=driver.current_url
 print ('Profile selected')
-driver.save_screenshot('Screenshot3.png')
 
 
 
@@ -145,7 +146,6 @@ while(round):
     element=(driver.find_element(By.XPATH,"//div[@data-list-context='topTen']/div[@class='rowContainer rowContainer_title_card']/div[@class='ptrack-container']/div[@class='rowContent slider-hover-trigger-layer']/div[@class='slider']/div[@class='sliderMask showPeek']/div[@class='sliderContent row-with-x-columns']/div[@class='slider-item slider-item-"+round_secret+"']/div[@class='title-card-container ltr-0']"))
     actions=ActionChains(driver)
     actions.click(element).perform()
-    driver.save_screenshot('Screenshot4.png')
     time.sleep(10)
     element = driver.find_element(By.CSS_SELECTOR, "body")
     actions = ActionChains(driver)
@@ -178,19 +178,16 @@ while(round):
                             if (len(data)>0):
                                     timestamp = re.findall(r'console-api\'\,(.*?)\}',str(e))
                                     if(len(timestamp)>0):
-                                            writer.writerow([data[0]+timestamp[0]])
+                                            print(data[0]+timestamp[0])
     
     while(newUrl==currentUrl and now<after_2_30_hour):
         newUrl=driver.current_url
         now=datetime.datetime.now()
-        driver.save_screenshot('Screenshot5.png')
         time.sleep(60)
     
     driver.get(netflix_url)
     time.sleep(10)
     print ("Scraping "+str(watched)+": OK")
-    watched+=1
-    ##ici avec false le robot regardera une seule vidéo ou série
     round=False
     
 

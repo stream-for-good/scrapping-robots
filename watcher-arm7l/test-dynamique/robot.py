@@ -117,7 +117,11 @@ print ('Netflix credentials work!')
 
 
 #Select Profile
-driver.find_element(By.CSS_SELECTOR, ".profile:nth-child(1) .profile-icon").click()
+roundsecret=randbelow(5)
+while (roundsecret==0):
+    roundsecret=randbelow(5)
+round_secret=str(roundsecret)
+driver.find_element(By.CSS_SELECTOR, ".profile:nth-child("+round_secret+") .profile-icon").click()
 time.sleep(10)
 netflix_url=driver.current_url
 print ('Profile selected')
