@@ -202,6 +202,7 @@ while(round):
     time.sleep(10)
     print ("Scraping "+str(watched)+": OK")
     watched+=1
+    round=True
     if (watched==10):
         break
         

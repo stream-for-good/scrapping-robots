@@ -13,6 +13,9 @@ import docker
 #MADE WITH BY THE L3 MIAGE 2020-2021
 
 
+time.sleep(180)
+#Necessary time for composer
+
 
 f=list(open('envfile'))
 VOD_USER=(f[0].split('\n'))[0]

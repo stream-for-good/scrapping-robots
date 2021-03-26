@@ -43,8 +43,8 @@ result2=github_release.gh_asset_download("discoverability/discoverability","5.2.
 
 
 #Set a Display
-#display = Display(visible=0, size=(1280, 720))
-#display.start()
+display = Display(visible=0, size=(1280, 720))
+display.start()
 print ('Display Activated')
 
 

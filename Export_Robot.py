@@ -10,7 +10,7 @@ import requests
 
 
 #NETFLIX QUERY
-robots_collection=["watcher","thumbnails","direct","directid"]
+robots_collection=["watcher","thumbnails","direct","netflixid"]
 for i in range (len(robots_collection)):
     print(robots_collection[i])
     data={
