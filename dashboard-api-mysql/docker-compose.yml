@@ -11,8 +11,8 @@ services:
     ports:
       - '8000:80'
   mysql:
-    image: 'hypriot/rpi-mysql:latest'
-    container_name: mysql-container
+    image: 'mysql:latest'
+    container_name: mysql-container-scrapping
     environment:
       MYSQL_DATABASE: 'scrapping'
       MYSQL_PASSWORD: 'scrapping'
