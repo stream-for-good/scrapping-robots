@@ -5,13 +5,12 @@ import csv
 import datetime
 import json
 import os
-import github_release
 import requests
 import docker
 
 
 
-#MADE WITH LOVE BY THE L3 MIAGE 2020-2021
+#MADE WITH BY THE L3 MIAGE 2020-2021
 
 
 
