@@ -137,12 +137,6 @@ for i in range (1,40,1):
     time.sleep(3)
     driver.find_element(By.CSS_SELECTOR, row).click()
     time.sleep(3)
-    driver.find_element(By.CSS_SELECTOR, row).click()
-    time.sleep(3)
-    driver.find_element(By.CSS_SELECTOR, row).click()
-    time.sleep(3)
-    driver.find_element(By.CSS_SELECTOR, row).click()
-    time.sleep(3)
 
 
 now=datetime.datetime.now()
@@ -168,7 +162,3 @@ actions.send_keys(Keys.ESCAPE)
 #Close Session
 driver.close()
 print ('Done')
-
-
-
-
