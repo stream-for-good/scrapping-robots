@@ -198,12 +198,10 @@ while(round):
         time.sleep(60)
     
     driver.get(netflix_url)
-    time.sleep(10
+    time.sleep(10)
     break
-    print ("Scraping "+str(watched)+": OK")
-    watched+=1
-    if (watched==10):
-        break
+   
+    
         
 
 #Close Session
