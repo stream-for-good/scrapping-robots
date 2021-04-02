@@ -17,7 +17,8 @@ sh requirements/install.sh
 
 
 
-First of all if you are on ARM system install the SSL library for docker:
+First of all if you are on ARM system install the library who provides a high level interface to constructing,
+analyzing and installing seccomp filters via a BPF passed to the Linux Kernel's prctl() syscall necessary for docker under Arm7l architecture:
 sh SSL-LIB-BUILD-ARM.sh  
 (do it one time)
 
