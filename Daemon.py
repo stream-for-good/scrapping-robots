@@ -10,7 +10,7 @@ import docker
 
 
 
-#MADE WITH BY THE L3 MIAGE 2020-2021
+#MADE WITH <3 BY THE L3 MIAGE 2020-2021
 
 
 time.sleep(180)
@@ -57,21 +57,21 @@ while (True):
     elif (robot=="watcher"):
         while(loop!=0):
             loop-=1
-            container=client.containers.run("wallseven/watcher",detach=True,environment=credentials,name="container-thumbnails",remove=True)
+            container=client.containers.run("wallseven/watcher",detach=True,environment=credentials,name="container-watcher",remove=True)
             for line in container.logs(stream=True):
                 text+=str(line)
                 
     elif (robot=="direct"):
         while(loop!=0):
             loop-=1
-            container=client.containers.run("wallseven/direct",detach=True,environment=credentials,name="container-thumbnails",remove=True)
+            container=client.containers.run("wallseven/direct",detach=True,environment=credentials,name="container-direct",remove=True)
             for line in container.logs(stream=True):
                 text+=str(line)
                 
     elif (robot=="netflixid"):
         while(loop!=0):
             loop-=1
-            container=client.containers.run("wallseven/netflixid",detach=True,environment=credentials,name="container-thumbnails",remove=True)
+            container=client.containers.run("wallseven/netflixid",detach=True,environment=credentials,name="container-netflixid",remove=True)
             for line in container.logs(stream=True):
                 text+=str(line)
                 
