@@ -164,20 +164,16 @@ while(round):
     print("you are watching:")
     print(currentUrl)
     log=driver.get_log('browser')
-    with open('data'+str(watched)+'.csv', 'w',encoding="utf-8", newline='') as file:
-                    writer = csv.writer(file)
-                    writer.writerow(["Voici les données récupérées par le robot watcher" +str(now) ])
-                    writer.writerow([""])
-                    iter=0
-                    for e in log:
-                            if (iter<2):
-                                    iter+=1
-                                    continue 
-                            data = re.findall(r'SPACE\](.*?)"', str(e))
-                            if (len(data)>0):
-                                    timestamp = re.findall(r'console-api\'\,(.*?)\}',str(e))
-                                    if(len(timestamp)>0):
-                                            print(data[0]+timestamp[0])
+    iter=0
+    for e in log:
+        if (iter<2):
+            iter+=1
+            continue 
+        data = re.findall(r'SPACE\](.*?)"', str(e))
+        if (len(data)>0):
+            timestamp = re.findall(r'console-api\'\,(.*?)\}',str(e))
+            if(len(timestamp)>0):
+                print(data[0]+timestamp[0])
     
     while(newUrl==currentUrl and now<after_2_30_hour):
         newUrl=driver.current_url

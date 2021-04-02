@@ -4,3 +4,4 @@ requests>=2.24.0
 githubrelease>=1.5.8
 PyVirtualDisplay>=2.0.0
 docker>=4.4.4
+s4gpy>=0.0.8
