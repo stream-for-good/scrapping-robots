@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 import time
 import re
-import csv
-import datetime
 import json
 import os
 import requests
