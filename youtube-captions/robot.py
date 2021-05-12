@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import logging
+import sys
 import time
 import re
 import csv
@@ -22,15 +24,16 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
 
 
+logging.basicConfig(stream=sys.stderr, level=logging.INFO)
 
+logging.info('Jackdaws love my big sphinx of quartz.')
 
-
-print ('Starting ...')
+logging.info ('Starting ...')
 
 #Set a Display
-display = Display(visible=1, size=(1280, 720))
+display = Display(visible=0, size=(1280, 720))
 display.start()
-print ('Display Activated')
+logging.info ('Display Activated')
 
 
 #Options for the ChromeDriver
@@ -62,10 +65,12 @@ actions.send_keys(Keys.TAB).send_keys(Keys.TAB).send_keys(Keys.TAB).send_keys(Ke
 
 time.sleep(5)
 #Netflix Login
-element=driver.find_elements(By.CSS_SELECTOR, "ytd-menu-renderer yt-icon-button button yt-icon")[9]
+element=driver.find_elements(By.CSS_SELECTOR, "#info button[aria-label='More actions']")[0]
 element.click()
 time.sleep(2)
-element=driver.find_elements(By.CSS_SELECTOR, "yt-formatted-string.ytd-menu-service-item-renderer")[0]
+
+
+element=driver.find_elements(By.CSS_SELECTOR, ".ytd-menu-popup-renderer > ytd-menu-service-item-renderer")[0]
 time.sleep(2)
 element.click()
 time.sleep(5)

@@ -7,6 +7,7 @@
 | direct | [![Build Status](https://travis-ci.com/stream-for-good/scrapping-robots.svg?branch=main)](https://travis-ci.com/stream-for-good/scrapping-robots) | [Docker images](https://hub.docker.com/r/stream4good/scrapping-robot-direct)| Records netflix live schedule |
 | netflixid | [![Build Status](https://travis-ci.com/stream-for-good/scrapping-robots.svg?branch=main)](https://travis-ci.com/stream-for-good/scrapping-robots) | [Docker images](https://hub.docker.com/r/stream4good/scrapping-robot-netflixid)| Records metadata on netflix video |
 | thumbnails | [![Build Status](https://travis-ci.com/stream-for-good/scrapping-robots.svg?branch=main)](https://travis-ci.com/stream-for-good/scrapping-robots) | [Docker images](https://hub.docker.com/r/stream4good/scrapping-robot-thumbnails)| Records data from robot scripts |
+| thumbnails | [![Build Status](https://travis-ci.com/stream-for-good/scrapping-robots.svg?branch=main)](https://travis-ci.com/stream-for-good/scrapping-robots) | [Docker images](https://hub.docker.com/r/stream4good/scrapping-robot-youtube-caption)| Scraps Youtube Captions |
 
 ## Prerequisites
 
