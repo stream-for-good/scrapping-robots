@@ -56,6 +56,8 @@ caps['goog:loggingPrefs'] = { 'browser':'ALL' }
 
 #Load the driver
 driver = webdriver.Chrome(options=opt,desired_capabilities=caps)
-
+print(f"****{args.configuration}")
 response=requests.post("https://scriptgenyoutube.miage.dev/generate",json=json.loads(args.configuration))
-logging.info(json.dumps(response.json()))
+response_text=json.dumps(response.json())
+logging.info(response_text)
+print(response_text) # return stuff to stdout for logging purposed through rabbitmq
