@@ -1,34 +1,34 @@
 {
-    "0":[
+    "actions":[
     	{
             "action": "settings",
             "options": {
                 "autoPlay": false
             }
-        },
+         },
         {
             "action": "search",
             "toSearch": "Qanon"
         },
         {
             "action": "watch",
-            "index": 1,
+            "index": 3,
             "watchContext": {
-                "stopsAt": "never"
+                "stopsAt": "5"
             }
         },
         {
             "action": "watch",
             "index": 1,
             "watchContext": {
-                "stopsAt": "10s",
+                "stopsAt": "5",
                 "social": "like"
             }
         }, {
             "action": "watch",
             "index": 2,
             "watchContext": {
-                "stopsAt": "10s",
+                "stopsAt": "5",
                 "social": "dislike"
             }
         },
@@ -39,7 +39,7 @@
             "action": "watch",
             "index": 5,
             "watchContext": {
-                "stopsAt": "never"
+                "stopsAt": "5"
             }
         },
         {

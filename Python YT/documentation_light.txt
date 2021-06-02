@@ -1,0 +1,155 @@
+Ce script contient l'ensemble des fonctions qui permet de naviguer automatiquement et de manière controlée sur le web
+Particulièrement, il est utilisé pour naviguer et scrapper YouTube
+Voici la liste des fonctions :
+    YouTube_Google_Log_In(email)
+    YouTube_Google_Log_Out()
+    YouTube_Acces_Website()
+    YouTube_Accept_Cookies()
+    YouTube_Deny_Log_In()
+    YouTube_Toggle_AutoPlay()
+    YouTube_Get_Video_Id_From_Url(url)
+    YouTube_Music_No_Thanks()
+    home_page()
+    scrollDown()
+    find_caption()
+    find_video()
+    select_video(n=0)
+    find_video_length_in_seconds()
+    watch_the_video_for(n=0)
+    dislike_video()
+    like_video()
+    go_to_channel()
+    search_with_url(url)
+    search_bar(text)
+    robot(file)
+    test_select_video(n=0)
+    test_find_video()
+    test_go_to_channel()
+    test_search_bar(text)
+    test_like_video()
+    test_dislike_video()
+    test_find_video_length_in_seconds()
+    test_scroll_down()
+    test_YouTube_Toggle_AutoPlay()
+    test_YouTube_Google_Log_Out()
+    test_YouTube_Google_Log_In(email, password)
+    test_YouTube_Acces_Website()
+    
+Voici la liste du code qui n'est pas dans des fonctions :
+    Ligne 70 à 107
+    Ligne 544 à 556
+
+
+YouTube_Google_Log_In(email)
+    Paramètres :
+        String  email       l'email du compte avec lequel on veut se loger
+    Cette fonction permet de recuperer un identifiant de connexion pour se connecter a un compte Google, puis revenir a la page d'acceuil de YouTube
+    (Elle devrait permettre de se loger depuis n'importe quel endroit du site, pas encore testé)
+
+YouTube_Google_Log_Out()
+    Cette fonction permet de se déconnecter depuis la page d'accueil de YouTube
+    (devrait fonctionner depuis n'importe quel endroit du site, pas encore testé)
+
+YouTube_Acces_Website()
+    Cette fonction permet d'accéder à la page d'accueil de YouTube
+
+YouTube_Accept_Cookies()
+    Cette fonction permet d'accepter les cookies
+    En effet, sur Google, lorsqu'un nouvel utilisateur souhaite bénéficer des services de Google, il est obligé d'accepter les cookies
+    Comme chaque lancement du script agit comme un nouvel utilisateur, il est nécessaire de les accepter à chaque fois
+
+YouTube_Deny_Log_In()
+    Cette fonction permet de ne pas s'identifier lorsqu'une fenêtre pop up s'ouvre dans le navigateur
+    Elle apparait la première fois que l'on souhaite utiliser un service Google
+
+YouTube_Toggle_AutoPlay()
+    Cette fonction permet de cliquer sur le bouton auto-play
+    Auto-play est un bouton qui agit comme un toggle ; étant activé par défaut, un nombre impair de cliques empêche la lecture automatique de vidéos.
+    Un nombre pair active la lecture automatique de vidéos
+
+YouTube_Get_Video_Id_From_Url(url)
+    Paramètre :
+        String  url l'url d'une vidéo YouTube
+    Return :
+        String      l'id de l'url
+    Error :
+        String  ''  String vide
+    Permet de récupérer l'id d'un url de vidéo YouTube passé en paramètre.
+    Retourne un String vide s'il rencontre une erreur
+
+YouTube_Music_No_Thanks()
+cettee fonction permet de décliner l'offre de YouTube Music
+
+home_page()
+    Cette fonction permet de revenir à la page d'accueil de YouTube
+    Fonctionne depuis n'importe où sur le site
+
+scrollDown()
+    Cette fonction permet de scroller vers le bas
+    L'objectif est de charger plus de vidéos
+
+find_caption()
+    FONCTION A DISPARAITRE
+    Return :
+        String  caption Un String contenant toutes les captions de la vidéo en cours
+    Cette fonction permet de récupérer tous les sous-titres d'une vidéo depuis la page YouTube de cette vidéo
+
+find_video()
+    Return :
+        List    l   Retourne une liste contenant tous les id des vidéos chargées sur la page actuelle
+    Cette fonction retourne une liste contenant tous les id des vidéos chargées sur la page actuelle
+
+select_video(n=0)
+    Paramètre :
+        int n   Numéro de la vidéo à visionner
+    Permet de visionner la n-ième vidéo sur la page. Fonctionne sur la page d'accueil, après une recherche dans l'outil de recherche YouTube, depuis une vidéo ou depuis l'onglet vidéo d'une chaine YouTube.
+    Si aucun paramètre n'est donné, c'est la toute première vidéo qui est visionnée
+
+find_video_length_in_seconds()
+    Return :
+        int res Durée de la vidéo en secondes
+    Trouve la durée de la vidéo sur la page web, convertit le temps trouvé en secondes et le retourne
+
+watch_the_video_for(n=0)
+    Paramètre :
+        int n   Nombres de secondes de visionnage de la vidéo
+    Prends en paramètre un nombre de secondes et hatle le programme pendant cette durée.
+    Permet de simuler le visionnage d'une vidéo.
+    Si aucun paramètre n'est donné, alors la fonction n'halte pas le programme
+ 
+dislike_video()
+    Cette fonction permet de dislike une vidéo.
+    Cette fonction n'a un effet que si le robot s'est "log in" avec un compte Google
+
+like_video()
+    Cette fonction permet de like une vidéo.
+    Cette fonction n'a un effet que si le robot s'est "log in" avec un compte Google
+
+go_to_channel()
+    Cette fonction permet depuis la page de visonnage d'une vidéo d'accéder à la chaine qui a uploader cette vidéo
+    Cette fonction, une fois sur la chaine, va automatiquement sur l'onglet "Vidéos"
+
+search_with_url(url)
+    Paramètres :
+        String  url L'url d'une vidéo YouTube
+    Cette fonction de charger la page d'une vidéo YouTube depuis son url
+
+search_bar(text)
+    Paramètre :
+        String  text    Texte correspondant à la recherhce YouTube
+    Permet d'entrer des mots-clefs, du texte dans l'outil de recherche YouTube depuis n'importe quel endroit de YouTube.
+    YouTube gardant en mémoire la recherche précédante, cette fonction efface tous ce qui à été écris et entre le String passé en paramètre et exécute la recherche
+
+robot(file)
+    Paramètre :
+        List    x   Une liste contenant des dictionnaires, correspondant aux actions que doit exécute le script
+    Cette fonction permet de lire une liste et d'exécuter les instructions stockées dans des dictionnaires.
+    Cette fonction correspond au "robot", qui va utiliser la quasi totalité des autres fonctions pour fonctionner.
+    Elle envoye à des points clefs des requêtes à la DataBase
+    Variables :
+        String          thisSession     Converti le nombre de secondes depuis l'Epoch en String. Permet d'assurer un ordre entre les différentes sessions
+        Boolean         toggle_auto_play_bool   Permet d'assurer le bon fonctionnement de YouTube_Toggle_AutoPlay()
+        Object          actionNumber        Permet d'avoir un objet qui assure l'incrémentation de l'index de chaque action, pour garder dans la BdD l'odre de déroulement des actions faites par le robot
+        int         currentAction       Permet de savoir quelle est l'action actuellement réalisée par le robot. Sera envoyée dans la requête à la BdD
+
+
