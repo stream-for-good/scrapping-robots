@@ -1,0 +1,5 @@
+selenium>=3.141.0
+beautifulsoup4>=4.9.1
+s4gpy>=0.0.10
+undetected-chromedriver>=2.2.7
+requests>=2.25.1
