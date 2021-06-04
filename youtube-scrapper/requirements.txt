@@ -1,7 +1,7 @@
 selenium>=3.141.0
-dateparser>=0.7.6
-requests>=2.24.0
-githubrelease>=1.5.8
+beautifulsoup4>=4.9.1
+s4gpy>=0.0.10
+undetected-chromedriver>=2.2.7
+requests>=2.25.1
 PyVirtualDisplay>=2.0.0
 xvfbwrapper>=0.2.9
-s4gpy>=0.0.8

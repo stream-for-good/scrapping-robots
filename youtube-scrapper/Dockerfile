@@ -4,6 +4,8 @@ RUN apk add python3-dev
 COPY ./requirements.txt /tmp
 RUN pip3 install -r /tmp/requirements.txt
 RUN mkdir -p /opt/robots
-COPY ./robot.py /opt/robots/robot.py
+RUN mkdir -p /root/.local/share/undetected_chromedriver
+RUN cp /usr/lib/chromium/chromedriver /root/.local/share/undetected_chromedriver/chromedriver
+COPY ./*.py /opt/robots/
 WORKDIR /opt/robots
 ENTRYPOINT ["python3", "./robot.py"]
