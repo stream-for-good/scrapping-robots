@@ -128,8 +128,9 @@ def YouTube_Get_Video_Id_From_Url(url):
 def YouTube_Music_No_Thanks():
     try:
         driver.find_element_by_css_selector("ytd-button-renderer#dismiss-button > a > tp-yt-paper-button > yt-formatted-string").click()
+        driver.switch_to.default_content()
     except:
-        print("Error in YouTube_Music_No_Thanks()")
+        pass
 
 def get_Google_Accounts():
     api = S4GAPI("pierre.rambert@hotmail.fr","Pj1101vC")
@@ -174,27 +175,28 @@ def find_video():
 def select_video(n=0):
     try:
         currUrl = driver.current_url
+        driver.switch_to.default_content()
+        if n > 15:
+            scrollDown()
         if currUrl == "https://www.youtube.com/":
             # From homepage
-#            print("homepage")
+    #            print("homepage")
             driver.find_elements_by_css_selector("#contents > ytd-rich-item-renderer")[n].click()
         elif "watch?v=" in currUrl:
             # From a watching video
-#            print("video")
+    #            print("video")
             driver.find_elements_by_css_selector("#items > ytd-compact-video-renderer")[n].click()
         elif "results?search_query=" in currUrl:
             # From a search
-#            print("search")
+    #            print("search")
             driver.find_elements_by_css_selector("#contents > ytd-video-renderer > #dismissible > ytd-thumbnail")[n].click()
         else:
             # From a video tab from a channel
-#            print("channel")
+    #            print("channel")
             driver.find_elements_by_css_selector("#items > ytd-grid-video-renderer")[n].click()
-    except:
-        time.sleep(2)
-        print("I'm trying to click on a video")
-        scrollDown()
-        select_video(n)
+    except IndexError:
+        m = int(n/2)
+        select_video(m)
 
 
 def find_video_length_in_seconds():
@@ -267,6 +269,7 @@ def robot(file):
     actionNumber.incr()
     for x in file:
         YouTube_Deny_Log_In()
+        YouTube_Music_No_Thanks()
         if x["action"] == 'settings':
             currentAction = 1
             print("Let's change some settings ⊂((・▽・))⊃")
@@ -291,13 +294,14 @@ def robot(file):
         elif x["action"] == 'search':
             print("Let's search for : " + str(x["toSearch"]) + " ー( ´ ▽ ` )ﾉ")
             currentAction = 2
-            search_bar(x["toSearch"])
+            searchedWords = str(x["toSearch"])
+            search_bar(searchedWords)
             time.sleep(2)
             listVideos = find_video()
             print("Where's the list of all the videos on this page (*~▽~) :")
             for x in listVideos:
                 print("\t"+str(x))
-            requests.post("https://"+ urlForDB + "/api/log/new", headers={"accept":"application/ld+json","Content-Type": "application/ld+json"}, json={"session":thisSession,"action":currentAction, "videos":listVideos, "key_word" : x["toSearch"], "position":actionNumber.get()})
+            requests.post("https://"+ urlForDB + "/api/log/new", headers={"accept":"application/ld+json","Content-Type": "application/ld+json"}, json={"session":thisSession,"action":currentAction, "videos":listVideos, "key_word" : searchedWords, "position":actionNumber.get()})
             actionNumber.incr()
         elif x["action"] == 'watch':
             currentAction = 3
@@ -424,4 +428,4 @@ def launch():
 
 
 
-#launch()
+launch()
