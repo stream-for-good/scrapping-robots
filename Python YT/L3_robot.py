@@ -181,7 +181,7 @@ def select_video(n=0):
         if currUrl == "https://www.youtube.com/":
             # From homepage
     #            print("homepage")
-            driver.find_elements_by_css_selector("#contents > ytd-rich-item-renderer")[n].click()
+            driver.find_elements_by_css_selector("#contents > ytd-rich-item-renderer > #content")[n].click()
         elif "watch?v=" in currUrl:
             # From a watching video
     #            print("video")
@@ -197,6 +197,9 @@ def select_video(n=0):
     except IndexError:
         m = int(n/2)
         select_video(m)
+    except:
+        print("Ceci est une erreur que je n'arrive pas a diagnostiquer ... désolé ( ˘︹˘' )")
+        return False
 
 
 def find_video_length_in_seconds():
@@ -312,21 +315,22 @@ def robot(file):
                 search_with_url(x["url"])
             elif "index" in x :
                 print("Let's watch the video number : " + str(x["index"]) + " on this page ヾ(＾∇＾)")
-                select_video(x["index"])
+                aux = select_video(x["index"])
                 index = x["index"]
             else:
                 print("Let's watch the video number : 1 on this page ヾ(＾∇＾)")
-                select_video()
+                aux = select_video()
                 index = 1
             time.sleep(2)
-            currentVideo = driver.current_url
-            time.sleep(2)
-            listVideos = find_video()
-            print("Where's the list of all the videos on this page (*~▽~) :")
-            for x in listVideos:
-                print("\t"+str(x))
-            requests.post("https://"+ urlForDB + "/api/log/new", headers={"accept":"application/ld+json","Content-Type": "application/ld+json"}, json={"session":thisSession,"currentVideo":YouTube_Get_Video_Id_From_Url(currentVideo),"action":currentAction, "videos":listVideos, "index":index, "position":actionNumber.get()})
-            actionNumber.incr()
+            if aux != False:
+                currentVideo = driver.current_url
+                time.sleep(2)
+                listVideos = find_video()
+                print("Where's the list of all the videos on this page (*~▽~) :")
+                for x in listVideos:
+                    print("\t"+str(x))
+                requests.post("https://"+ urlForDB + "/api/log/new", headers={"accept":"application/ld+json","Content-Type": "application/ld+json"}, json={"session":thisSession,"currentVideo":YouTube_Get_Video_Id_From_Url(currentVideo),"action":currentAction, "videos":listVideos, "index":index, "position":actionNumber.get()})
+                actionNumber.incr()
             if "watchContext" in x:
                 if x["watchContext"]["stopsAt"] == "never":
                     print("We're going to watch it 'til the end ! (*⌒∇⌒*)")
