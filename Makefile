@@ -7,7 +7,7 @@ SHELL := /bin/bash
 ROBOTS_DIRECTORIES = $(patsubst %/requirements.txt,%/requirements.txt-pip,$(wildcard ./*/requirements.txt))
 DOCKERFILES = $(patsubst %,%-build,$(wildcard ./*/Dockerfile))
 
-.PHONY: direct netflixid thumbnails reqs help docker-build
+.PHONY: direct netflixid thumbnails reqs help docker-build youtube-captions
 
 help:     ## Show this help.
 	@sed -ne '/@sed/!s/## //p' $(MAKEFILE_LIST)
@@ -35,5 +35,8 @@ direct: ## run the direct scrapping
 netflixid: ## run the scrapping for unknown netflix id in the database
 	@source ./.env && export VOD_USER && export VOD_PASSWORD && PATH=${PATH}:.:.. ./netflixid/robot.py
 
-thumbnails: ## TODO add HELP
+thumbnails: ## scap the thumbnails from netflix
 	@source ./.env && export VOD_USER && export VOD_PASSWORD && PATH=${PATH}:.:.. ./thumbnails/robot.py
+
+youtube-captions: ## scrap captions for a video ID
+	@export VIDEO_ID=Uf1c0tEGfrU && export PATH=${PATH}:.:.. && cd ./youtube-captions && python robot.py
