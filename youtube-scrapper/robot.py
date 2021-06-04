@@ -205,6 +205,9 @@ def find_video():
 def select_video(n=0):
     try:
         currUrl = driver.current_url
+        driver.switch_to.default_content()
+        if n > 15:
+            scrollDown()
         if currUrl == "https://www.youtube.com/":
             # From homepage
             #            logging.info("homepage")
@@ -222,11 +225,9 @@ def select_video(n=0):
             # From a video tab from a channel
             #            logging.info("channel")
             driver.find_elements_by_css_selector("#items > ytd-grid-video-renderer")[n].click()
-    except:
-        time.sleep(2)
-        logging.info("I'm trying to click on a video")
-        scrollDown()
-        select_video(n)
+    except IndexError:
+        m = int(n/2)
+        select_video(m)
 
 
 def find_video_length_in_seconds():
@@ -315,6 +316,7 @@ def robot(file,urlForDB):
     actionNumber.incr()
     for x in file:
         YouTube_Deny_Log_In()
+        YouTube_Music_No_Thanks()
         if x["action"] == 'settings':
             currentAction = 1
             logging.info("Let's change some settings ⊂((・▽・))⊃")
@@ -347,16 +349,14 @@ def robot(file,urlForDB):
         elif x["action"] == 'search':
             logging.info("Let's search for : " + str(x["toSearch"]) + " ー( ´ ▽ ` )ﾉ")
             currentAction = 2
-            search_bar(x["toSearch"])
+            searchedWords = str(x["toSearch"])
+            search_bar(searchedWords)
             time.sleep(2)
             listVideos = find_video()
             logging.info("Where's the list of all the videos on this page (*~▽~) :")
             for x in listVideos:
                 logging.info("\t" + str(x))
-            requests.post("https://" + urlForDB + "/api/log/new",
-                          headers={"accept": "application/ld+json", "Content-Type": "application/ld+json"},
-                          json={"session": thisSession, "action": currentAction, "videos": listVideos,
-                                "key_word": x["toSearch"], "position": actionNumber.get()})
+            requests.post("https://"+ urlForDB + "/api/log/new", headers={"accept":"application/ld+json","Content-Type": "application/ld+json"}, json={"session":thisSession,"action":currentAction, "videos":listVideos, "key_word" : searchedWords, "position":actionNumber.get()})
             actionNumber.incr()
         elif x["action"] == 'watch':
             currentAction = 3
