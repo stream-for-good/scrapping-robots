@@ -55,6 +55,11 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
+import sys
+import logging
+
+logging.basicConfig(stream=sys.stderr, level=logging.INFO)
+
 
 from crement import Lever
 from bs4 import BeautifulSoup
@@ -148,7 +153,7 @@ def YouTube_Google_Log_In(thisLogin):
         #driver.find_element_by_css_selector("#yDmH0d > c-wiz > div > div > div > div.L5MEH.Bokche.ypEC4c > div.lq3Znf > div.U26fgb.O0WRkf.oG5Srb.HQ8yf.C0oVfc.Zrq4w.WIL89.k97fxb.yu6jOd.M9Bg4d.j7nIZb > span > span").click()
         driver.find_element_by_css_selector("#yDmH0d > c-wiz.yip5uc.SSPGKf > c-wiz > div > div.p9lFnc > div > div > div > div.ZRg0lb.Kn8Efe > div:nth-child(3) > div > div.yKBrKe > div > span > span").click()
     except:
-        print("Error in YouTube_Google_Log_In(email, password)")
+        logging.info("Error in YouTube_Google_Log_In(email, password)")
 
 #Cette fonction permet de se déconnecter depuis la page d'accueil de YouTube
 #Fonctionne depuis n'importe quel endroit du site
@@ -161,7 +166,7 @@ def YouTube_Google_Log_Out():
         time.sleep(2)
         driver.get(currPage)
     except:
-        print("Error in YouTube_Google_Log_Out()")
+        logging.info("Error in YouTube_Google_Log_Out()")
 
 
 #Cette fonction permet d'accéder à la page d'accueil de YouTube
@@ -169,7 +174,7 @@ def YouTube_Acces_Website():
     try:
         driver.get("https://www.youtube.com/")
     except:
-        print("Error in YouTube_Acces_Website()")
+        logging.info("Error in YouTube_Acces_Website()")
 
 #Cette fonction permet d'accepter les cookies
 #En effet, sur Google, lorsqu'un nouvel utilisateur souhaite bénéficer des services de Google, il est obligé d'accepter les cookies
@@ -178,7 +183,7 @@ def YouTube_Accept_Cookies():
     try:
         driver.find_element_by_css_selector("#yDmH0d > c-wiz > div > div > div > div.NIoIEf > div.G4njw > div.qqtRac > form > div.lssxud > div > button").click()
     except:
-        print("Error in YouTube_Accept_Cookies()")
+        logging.info("Error in YouTube_Accept_Cookies()")
 
 #Cette fonction permet de ne pas s'identifier lorsqu'une fenêtre pop up s'ouvre dans le navigateur
 #Elle apparait la première fois que l'on souhaite utiliser un service Google
@@ -188,7 +193,7 @@ def YouTube_Deny_Log_In():
         time.sleep(1)
         driver.switch_to.default_content()
     except:
-        print("Error in YouTube_Deny_Log_In()")
+        logging.info("Error in YouTube_Deny_Log_In()")
 
 #Cette fonction permet de cliquer sur le bouton auto-play
 #Auto-play est un bouton qui agit comme un toggle ; étant activé par défaut, un nombre impair de cliques empêche la lecture automatique de vidéos.
@@ -206,7 +211,7 @@ def YouTube_Toggle_AutoPlay(boolean):
             if isPressed.get_attribute("aria-checked") == "true":
                 isPressed.click()
     except:
-        print("Error in YouTube_Toggle_AutoPlay(boolean)")
+        logging.info("Error in YouTube_Toggle_AutoPlay(boolean)")
 
 
 #Paramètre :
@@ -223,7 +228,7 @@ def YouTube_Get_Video_Id_From_Url(url):
             return ''
         return url.split("=")[1].split("&")[0]
     except:
-        print("Error in YouTube_Get_Video_Id_From_Url(url)")
+        logging.info("Error in YouTube_Get_Video_Id_From_Url(url)")
         return ''
 
 #Cette fonction permet de décliner l'offre de YouTube Music
@@ -231,7 +236,7 @@ def YouTube_Music_No_Thanks():
     try:
         driver.find_element_by_css_selector("ytd-button-renderer#dismiss-button > a > tp-yt-paper-button > yt-formatted-string").click()
     except:
-        print("Error in YouTube_Music_No_Thanks()")
+        logging.info("Error in YouTube_Music_No_Thanks()")
 
 #Cette fonction retourne une liste des comptes qui peuvent etres utilise pour se connecter a un compte Google
 def get_Google_Accounts():
@@ -244,7 +249,7 @@ def home_page():
     try:
         driver.find_element_by_css_selector("#logo > a > div > #logo-icon").click()
     except:
-        print("Error in home_page()")
+        logging.info("Error in home_page()")
 
 #Cette fonction permet de scroller vers le bas
 #L'objectif est de charger plus de vidéos
@@ -252,7 +257,7 @@ def scrollDown():
     try:
         driver.execute_script("window.scrollBy(0,1500);")
     except:
-        print("Error in scrollDown()")
+        logging.info("Error in scrollDown()")
 
 #FONCTION A DISPARAITRE
 #Return :
@@ -265,7 +270,7 @@ def find_caption():
         caption = "".join([e.get_attribute('innerHTML') for e in driver.find_elements_by_css_selector("div.cue-group > div > div")])
         return caption
     except:
-        print("Error in find_caption()")
+        logging.info("Error in find_caption()")
         return ''
 
 #Return :
@@ -283,7 +288,7 @@ def find_video():
             l.append(idVideo)
         return l
     except:
-        print("Error in find_video")
+        logging.info("Error in find_video")
 
 #Paramètre :
 #    int n   Numéro de la vidéo à visionner
@@ -294,40 +299,40 @@ def select_video(n=0):
     currUrl = driver.current_url
     if currUrl == "https://www.youtube.com/":
         # From homepage
-        print("homepage")
+        logging.info("homepage")
         driver.find_elements_by_css_selector("#contents > ytd-rich-item-renderer")[n].click()
     elif "watch?v=" in currUrl:
         # From a watching video
-        print("video")
+        logging.info("video")
         driver.find_elements_by_css_selector("#items > ytd-compact-video-renderer")[n].click()
     elif "results?search_query=" in currUrl:
         # From a search
-        print("search")
+        logging.info("search")
         driver.find_elements_by_css_selector("#contents > ytd-video-renderer > #dismissible > ytd-thumbnail")[n].click()
     else:
         # From a video tab from a channel
-        print("channel")
+        logging.info("channel")
         driver.find_elements_by_css_selector("#items > ytd-grid-video-renderer")[n].click()
 #    try:
 #        currUrl = driver.current_url
 #        if currUrl == "https://www.youtube.com/":
 #            # From homepage
-#            print("homepage")
+#            logging.info("homepage")
 #            driver.find_elements_by_css_selector("#contents > ytd-rich-item-renderer")[n].click()
 #        elif "watch?v=" in currUrl:
 #            # From a watching video
-#            print("video")
+#            logging.info("video")
 #            driver.find_elements_by_css_selector("#items > ytd-compact-video-renderer")[n].click()
 #        elif "results?search_query=" in currUrl:
 #            # From a search
-#            print("search")
+#            logging.info("search")
 #            driver.find_elements_by_css_selector("#contents > ytd-video-renderer > #dismissible > ytd-thumbnail")[n].click()
 #        else:
 #            # From a video tab from a channel
-#            print("channel")
+#            logging.info("channel")
 #            driver.find_elements_by_css_selector("#items > ytd-grid-video-renderer")[n].click()
 #    except:
-#        print("Error in select_video() / " + driver.current_url + " / " + str(n))
+#        logging.info("Error in select_video() / " + driver.current_url + " / " + str(n))
 
 
 #Return :
@@ -342,7 +347,7 @@ def find_video_length_in_seconds():
             res += int(listTime[i]) * (60**i)
         return res
     except :
-        print("Error in find_video_length_in_seconds()")
+        logging.info("Error in find_video_length_in_seconds()")
 
 
 #Paramètre :
@@ -354,7 +359,7 @@ def watch_the_video_for(n=0):
     try:
         time.sleep(n)
     except:
-        print("Error in watch_the_video_for()")
+        logging.info("Error in watch_the_video_for()")
 
 #Cette fonction permet de dislike une vidéo.
 #Cette fonction n'a un effet que si le robot s'est "log in" avec un compte Google
@@ -362,7 +367,7 @@ def dislike_video():
     try:
         driver.find_element_by_css_selector(".ytd-video-primary-info-renderer > #top-level-buttons > .style-scope:nth-child(2) #button > #button > .style-scope").click()
     except:
-        print("Error in dislike_video()")
+        logging.info("Error in dislike_video()")
 
 #Cette fonction permet de like une vidéo.
 #Cette fonction n'a un effet que si le robot s'est "log in" avec un compte Google
@@ -370,7 +375,7 @@ def like_video():
     try:
         driver.find_element_by_css_selector(".ytd-video-primary-info-renderer > #top-level-buttons > .style-scope:nth-child(1) #button > #button > .style-scope").click()
     except:
-        print("Error in like_video()")
+        logging.info("Error in like_video()")
 
 #Cette fonction permet depuis la page de visonnage d'une vidéo d'accéder à la chaine qui a uploader cette vidéo
 #Cette fonction, une fois sur la chaine, va automatiquement sur l'onglet "Vidéos"
@@ -381,7 +386,7 @@ def go_to_channel():
         time.sleep(1)
         videoTab[1].click()
     except:
-        print("Error in go_to_channel()")
+        logging.info("Error in go_to_channel()")
 
 #Paramètres :
 #    String  url L'url d'une vidéo YouTube
@@ -390,7 +395,7 @@ def search_with_url(url):
     try:
         driver.get(url)
     except:
-        print("Error in search_with_url()")
+        logging.info("Error in search_with_url()")
 
 #Paramètre :
 #    String  text    Texte correspondant à la recherhce YouTube
@@ -403,23 +408,23 @@ def search_bar(text):
         driver.find_element_by_css_selector("#search-input > #search").send_keys(text)
         driver.find_element_by_css_selector("#search-icon-legacy").click()
     except:
-        print("Error in search_bar()")
+        logging.info("Error in search_bar()")
 
 
 def t():
     thisSession = str(int(time.time()))
-    print(thisSession)
+    logging.info(thisSession)
     urlForDB = "test.netops.fr"
     a = requests.post("https://"+ urlForDB + "/api/session/new",headers={"accept":"application/ld+json","Content-Type": "application/ld+json"}, json={"id":thisSession})
-    print(a)
+    logging.info(a)
     actionNumber = Lever()
     currentAction = 7
-    print(currentAction)
+    logging.info(currentAction)
     time.sleep(2)
     listVideos = find_video()
-    print(listVideos)
+    logging.info(listVideos)
     a = requests.post("https://"+ urlForDB + "/api/log/new", headers={"accept":"application/ld+json","Content-Type": "application/ld+json"}, json={"session":thisSession,"action":currentAction, "videos":listVideos})
-    print(a)
+    logging.info(a)
 
 #Paramètre :
 #    List    x   Une liste contenant des dictionnaires, correspondant aux actions que doit exécute le script
@@ -435,7 +440,7 @@ def robot(file):
     urlForDB = "test.netops.fr"
     thisSession = str(int(time.time()))
     a = requests.post("https://"+ urlForDB + "/api/session/new",headers={"accept":"application/ld+json","Content-Type": "application/ld+json"}, json={"id":thisSession})
-    print(a)
+    logging.info(a)
     lets_toggle = False
     isLogedIn = False
     actionNumber = Lever()
@@ -443,7 +448,7 @@ def robot(file):
     time.sleep(2)
     listVideos = find_video()
     a = requests.post("https://"+ urlForDB + "/api/log/new", headers={"accept":"application/ld+json","Content-Type": "application/ld+json"}, json={"session":thisSession,"action":currentAction, "videos":listVideos, "position":actionNumber})
-    print(a)
+    logging.info(a)
     actionNumber.incr()
     for x in file:
         YouTube_Deny_Log_In()
